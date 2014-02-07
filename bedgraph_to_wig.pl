@@ -116,7 +116,8 @@ sub print_wig_line {
     my $cur_ave_val = $$cur_val / $step;
     print OUT "$cur_ave_val\n";
   } elsif ($$cur_val != 0) { # Skips printing if --compact option selected and value is null.
-    if ($$cur_pos != $$exp_pos) { # Adds header if previous step had null value and was skipped in print out.
+    if ($$cur_pos == 0 || $$cur_pos != $$exp_pos) {
+      # Adds header if first step in chromosome, or if previous step had null value and was skipped in print out.
       print OUT "fixedStep chrom=$chr start=", $$cur_pos + 1, " step=$step span=$step\n";
       # +1 was added to convert from 0-based to 1-based coordinates.
     }
